@@ -13,23 +13,12 @@ void T_linha();
 void F();
 void erro();
 
-void erro()
-{
-    printf("Erro sintatico\n");
-    exit(1);
-}
-
-void reconhecer(int type)
-{
-    if (type == token.type)
-        token = analisadorLex(fp);
-    else
-        erro();
-}
-
 int main()
 {
-    fp = fopen("teste.txt", "r");
+    char arquivo[300];
+    printf("Insira o arquivo cujo queira executar >> ");
+    scanf("%s", arquivo);
+    fp = fopen(arquivo, "r");
     int c = 0;
     while (c = getc(fp), c != EOF)
     {
@@ -43,6 +32,20 @@ int main()
     }
     fclose(fp);
     return 0;
+}
+
+void erro()
+{
+    printf("Erro sintatico\n");
+    exit(1);
+}
+
+void reconhecer(int type)
+{
+    if (type == token.type)
+        token = analisadorLex(fp);
+    else
+        erro();
 }
 
 void Inicio()
