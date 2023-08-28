@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include "header.h"
-
+#include "pilha.h"
 FILE *fp;
 Token token;
 
@@ -21,7 +21,6 @@ void erro()
 
 void reconhecer(int type)
 {
-    printf("\n tipo de token = %d\n", token.type);
     if (type == token.type)
         token = analisadorLex(fp);
     else
@@ -40,13 +39,14 @@ int main()
         if (token.value != ';')
             erro();
         else
-            printf("Sucesso!!\n");
+            printf("\nResultado = %d\n", topo());
     }
     fclose(fp);
     return 0;
 }
 
-void Inicio(){
+void Inicio()
+{
     if (token.type == END_LINE)
         reconhecer(token.type);
     E();
@@ -67,8 +67,10 @@ void E_linha()
 {
     if (token.type == OPERATOR_BASIC)
     {
+        char opAux = token.value;
         reconhecer(OPERATOR_BASIC);
         T();
+        executaCalculo(opAux);
         E_linha();
     }
 }
@@ -77,23 +79,54 @@ void T_linha()
 {
     if (token.type == OPERATOR)
     {
+        char opAux = token.value;
         reconhecer(OPERATOR);
         F();
+        executaCalculo(opAux);
         T_linha();
     }
 }
+
 void F()
 {
-    if (token.type != NUMBER){
+    if (token.type != NUMBER)
+    {
         if (token.type == OPEN_PARANTHESIS)
             reconhecer(OPEN_PARANTHESIS);
-        
+
         E();
         if (token.type == CLOSE_PARANTHESIS)
             reconhecer(CLOSE_PARANTHESIS);
     }
-    else if (token.type == NUMBER){
+    else if (token.type == NUMBER)
+    {
+        printf("%d ", token.tokenVal);
+        push(token.tokenVal);
         reconhecer(NUMBER);
     }
-    else erro();
+    else
+        erro();
+}
+
+void executaCalculo(char operator)
+{
+    int a, b;
+    a = pop();
+    b = pop();
+    printf("%c ", operator);
+    switch (operator)
+    {
+    case '+':
+        push(a + b);
+        break;
+    case '-':
+        push(a - b);
+        break;
+    case '*':
+        push(a * b);
+        break;
+    case '/':
+        push(a / b);
+        break;
+    }
 }

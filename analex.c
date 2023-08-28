@@ -22,7 +22,7 @@ Token analisadorLex(FILE *fp)
 
     if (ch == '+' || ch == '-')
         return construtorToken(OPERATOR_BASIC, ch);
-    
+
     if (ch == '*' || ch == '/')
         return construtorToken(OPERATOR, ch);
 
@@ -45,7 +45,13 @@ Token analisadorLex(FILE *fp)
             ch = getc(fp);
         }
         ungetc(ch, fp);
-        return construtorToken(NUMBER, tokenval);
+
+        Token tokenDigit;
+        tokenDigit.line = line;
+        tokenDigit.type = NUMBER;
+        tokenDigit.tokenVal = tokenval;
+
+        return tokenDigit;
     }
 
     printf("erro lexico na linha %d\n\n", line);

@@ -16,11 +16,14 @@ typedef enum
 typedef struct 
 {
    TokenType type;
+   int tokenVal;
    char value;
    int line;
 } Token;
 
 Token analisadorLex(FILE *fp);
 Token construtorToken(TokenType type, char value);
+void Inicio();
+void executaCalculo(char operator);
 
 #endif
