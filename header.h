@@ -23,7 +23,5 @@ typedef struct
 
 Token analisadorLex(FILE *fp);
 Token construtorToken(TokenType type, char value);
-void Inicio();
-void executaCalculo(char operator);
 
 #endif
