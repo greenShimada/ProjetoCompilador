@@ -22,7 +22,7 @@ void erro()
 void reconhecer(int type)
 {
     if (type == token.type)
-        token = analisadorLex(fp);
+        token = anaLex(fp);
     else
         erro();
 }
@@ -105,13 +105,13 @@ void executaCalculo(char operator)
         push(a + b);
         break;
     case '-':
-        push(a - b);
+        push(b - a);
         break;
     case '*':
         push(a * b);
         break;
     case '/':
-        push(a / b);
+        push(b / a);
         break;
     }
 }

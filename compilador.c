@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
-#include "header.h"
+#include "anaLex.h"
 #include "pilha.h"
-#include "anasint.h"
+#include "anaSint.h"
 
 FILE *fp;
 Token token;
@@ -18,7 +18,7 @@ int main()
     while (c = getc(fp), c != EOF)
     {
         ungetc(c, fp);
-        token = analisadorLex(fp);
+        token = anaLex(fp);
         Inicio(token, fp);
         if (token.value != ';')
             erro();

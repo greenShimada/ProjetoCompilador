@@ -5,7 +5,10 @@
 #define NUM 256
 static int line = 1;
 
-Token analisadorLex(FILE *fp)
+Token anaLex(FILE *fp);
+Token construtorToken(TokenType type, char value);
+
+Token anaLex(FILE *fp)
 {
     int tokenval = 0;
     char ch = getc(fp);

@@ -1,7 +1,7 @@
 #ifndef PILHA_HEADER_H
 #define PILHA_HEADER_H
 
-#define MAX 1000
+#define MAX 3
 
 int PILHA[MAX];
 int size = 0;

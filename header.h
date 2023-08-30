@@ -21,7 +21,4 @@ typedef struct
    int line;
 } Token;
 
-Token analisadorLex(FILE *fp);
-Token construtorToken(TokenType type, char value);
-
 #endif
