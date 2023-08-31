@@ -15,7 +15,7 @@ void executaCalculo(char operator);
 
 void erro()
 {
-    printf("Erro sintatico\n");
+    printf("Erro sintatico na linha %d\n", token.line);
     exit(1);
 }
 

@@ -53,6 +53,7 @@ Token anaLex(FILE *fp)
         tokenDigit.line = line;
         tokenDigit.type = NUMBER;
         tokenDigit.tokenVal = tokenval;
+        tokenDigit.value = tokenval + '0';
 
         return tokenDigit;
     }
