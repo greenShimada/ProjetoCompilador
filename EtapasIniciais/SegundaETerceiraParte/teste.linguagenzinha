@@ -1,0 +1,6 @@
+function int main (int a, char b){
+  char arroz[10];
+
+  arroz = "f";
+  return 1;
+}
