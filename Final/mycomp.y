@@ -34,7 +34,7 @@
 %left '*' '/'
 
 %type <node> Exp Atribuicao Compound_Statement Statement Statement_Seq If_Statement
-%type <node> While_Statement Do_While_Statement Prog Funcao Declps Args Ldeclps
+%type <node> While_Statement Do_While_Statement Prog Funcao Args Declps Ldeclps
 
 %start Prog
 %%
@@ -44,7 +44,8 @@ Prog :
 	;
 	
 Funcao:
-    Tipo_f ID '(' Declps ')' '{' Decls Statement_Seq '}'  { Function(&$$, $2, $4, $8); printf("%s", $$.code); }
+    Tipo_f ID '(' Declps ')' '{' Decls Statement_Seq '}'  { Function(&$$, $2, $4, $8); 	
+															printf("%s", $$.code); }
    ;
    
 Declps :
@@ -53,7 +54,7 @@ Declps :
 	;
 	
 Ldeclps :
-	  Tipo ID  
+	  Tipo ID  {$$.place = $2}
 	| Ldeclps ',' Tipo ID 
 	;
      
@@ -102,9 +103,9 @@ Statement:
 	|	If_Statement 
 	| 	While_Statement {}
 	|   Do_While_Statement {}
-	|   ID '(' Args ')' ';' { CallFunction(&$$, $1, $3);}
-	|	PRINT '(' Exp ')' ';' {}
-	|   PRINTLN '(' Exp ')' ';' { Println(&$$,$3);}
+	|   ID '(' Args ')' ';' { CallFunction(&$$, $1, $3); }
+	|	PRINT '(' Exp ')' ';' { Print(&$$, $3); }
+	|   PRINTLN '(' Exp ')' ';' { Println(&$$,$3); }
 	|   ID '=' READ '(' ')' ';' { Read(&$$,$1);  }
 	;
 	

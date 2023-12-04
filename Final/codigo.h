@@ -15,13 +15,6 @@ int newLabel()
 	return label++;
 }
 
-int param = 0;
-void newParam(char *name)
-{
-	if (param < 3)
-		sprintf(name, "$a%d", param++);
-}
-
 void getName(int num, char *name)
 {
 	if (num >= 0)
@@ -116,6 +109,22 @@ void ExpRel(char *branch, struct no *Exp, struct no Exp1, struct no Exp2)
 	insert_cod(&Exp->code, instrucao);
 	sprintf(instrucao, "L%d:\n", label);
 	insert_cod(&Exp->code, instrucao);
+}
+
+void Print(struct no *Print, struct no Exp)
+{
+	char name_reg[10];
+	create_cod(&Print->code);
+	getName(Exp.place, name_reg);
+	insert_cod(&Print->code, Exp.code);
+	sprintf(instrucao, "\tli $v0, 1\n");
+	insert_cod(&Print->code, instrucao);
+
+	sprintf(instrucao, "\tmove $a0,%s\n", name_reg);
+	insert_cod(&Print->code, instrucao);
+
+	sprintf(instrucao, "\tsyscall\n");
+	insert_cod(&Print->code, instrucao);
 }
 
 void Println(struct no *Print, struct no Exp)
@@ -263,42 +272,27 @@ void CallFunction(struct no *Func, int Id, struct no Arg)
 	getName(Arg.place, reg_arg);
 
 	create_cod(&Func->code);
-	sprintf(instrucao, "\tmove $a0, %s", reg_arg);
+	sprintf(instrucao, "\tmove $a0, %s\n", reg_arg);
+	insert_cod(&Func->code, instrucao);
 	sprintf(instrucao, "\tjal FUNC%d\n", Id);
 	insert_cod(&Func->code, instrucao);
 }
 
-void Parameter(struct no *Arg, struct no Param)
+void MoveParameters(struct no *Func, struct no Declps)
 {
-	char reg_temp[5];
 	char reg_param[5];
 
-	getName(Param.place, reg_temp);
-	newParam(reg_param);
-
-	create_cod(&Arg->code);
-	sprintf(instrucao, "\tmove %s, %s\n", reg_param, reg_temp);
-	insert_cod(&Arg->code, instrucao);
+	getName(Declps.place, reg_param);
+	sprintf(instrucao, "\tmove %s, $a0\n", reg_param);
+	insert_cod(&Func->code, instrucao);
 }
 
-void DeclArgs(struct no *Func, struct no Declps)
+void Function(struct no *Func, int Id, struct no Declps, struct no Statement_Seq)
 {
-	char reg_arg[5];
-	if (Declps.place != 0)
-	{
-		create_cod(&Func->code);
-		getName(Declps.place, reg_arg);
-		sprintf(instrucao, "\tmove %s, $a0\n", reg_arg);
-		insert_cod(&Func->code, instrucao);
-	}
-}
-
-void Function(struct no *Func, int Id, struct no Declps, struct no Compound)
-{
-	DeclArgs(Func, Declps);
+	create_cod(&Func->code);
 	if (Func->place == 0)
 	{
-		insert_cod(&Func->code, Compound.code);
+		insert_cod(&Func->code, Statement_Seq.code);
 		sprintf(instrucao, "\tli $v0, 10\n\tsyscall\n");
 		insert_cod(&Func->code, instrucao);
 	}
@@ -306,7 +300,8 @@ void Function(struct no *Func, int Id, struct no Declps, struct no Compound)
 	{
 		sprintf(instrucao, "FUNC%d:\n", Id);
 		insert_cod(&Func->code, instrucao);
-		insert_cod(&Func->code, Compound.code);
+		MoveParameters(Func, Declps);
+		insert_cod(&Func->code, Statement_Seq.code);
 		sprintf(instrucao, "jr $ra\n");
 		insert_cod(&Func->code, instrucao);
 	}

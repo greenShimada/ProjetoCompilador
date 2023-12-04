@@ -461,12 +461,12 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    42,    42,    43,    47,    51,    52,    56,    57,    61,
-      62,    63,    67,    68,    72,    76,    77,    81,    82,    86,
-      89,    95,    96,    97,   101,   102,   103,   104,   105,   106,
-     107,   108,   111,   115,   116,   120,   121,   125,   129,   132,
-     133,   134,   135,   136,   137,   138,   139,   140,   141,   142,
-     143,   144,   145,   146
+       0,    42,    42,    43,    47,    52,    53,    57,    58,    62,
+      63,    64,    68,    69,    73,    77,    78,    82,    83,    87,
+      90,    96,    97,    98,   102,   103,   104,   105,   106,   107,
+     108,   109,   112,   116,   117,   121,   122,   126,   130,   133,
+     134,   135,   136,   137,   138,   139,   140,   141,   142,   143,
+     144,   145,   146,   147
 };
 #endif
 
@@ -1466,20 +1466,28 @@ yyreduce:
 
 /* Line 1455 of yacc.c  */
 #line 47 "mycomp.y"
-    { Function(&(yyval.node), (yyvsp[(2) - (9)].place), (yyvsp[(4) - (9)].node), (yyvsp[(8) - (9)].node)); printf("%s", (yyval.node).code); ;}
+    { Function(&(yyval.node), (yyvsp[(2) - (9)].place), (yyvsp[(4) - (9)].node), (yyvsp[(8) - (9)].node)); 	
+															printf("%s", (yyval.node).code); ;}
     break;
 
   case 5:
 
 /* Line 1455 of yacc.c  */
-#line 51 "mycomp.y"
+#line 52 "mycomp.y"
     { (yyval.node) = (yyvsp[(1) - (1)].node); ;}
+    break;
+
+  case 7:
+
+/* Line 1455 of yacc.c  */
+#line 57 "mycomp.y"
+    {(yyval.node).place = (yyvsp[(2) - (2)].place);}
     break;
 
   case 19:
 
 /* Line 1455 of yacc.c  */
-#line 86 "mycomp.y"
+#line 87 "mycomp.y"
     { create_cod(&(yyval.node).code); 
 								 insert_cod(&(yyval.node).code,(yyvsp[(1) - (1)].node).code);
 							   ;}
@@ -1488,7 +1496,7 @@ yyreduce:
   case 20:
 
 /* Line 1455 of yacc.c  */
-#line 89 "mycomp.y"
+#line 90 "mycomp.y"
     { create_cod(&(yyval.node).code); 
 								 insert_cod(&(yyval.node).code,(yyvsp[(1) - (2)].node).code); 
 								 insert_cod(&(yyval.node).code,(yyvsp[(2) - (2)].node).code);	
@@ -1498,196 +1506,196 @@ yyreduce:
   case 22:
 
 /* Line 1455 of yacc.c  */
-#line 96 "mycomp.y"
+#line 97 "mycomp.y"
     { (yyval.node) = (yyvsp[(1) - (1)].node); ;}
     break;
 
   case 26:
 
 /* Line 1455 of yacc.c  */
-#line 103 "mycomp.y"
+#line 104 "mycomp.y"
     {;}
     break;
 
   case 27:
 
 /* Line 1455 of yacc.c  */
-#line 104 "mycomp.y"
+#line 105 "mycomp.y"
     {;}
     break;
 
   case 28:
 
 /* Line 1455 of yacc.c  */
-#line 105 "mycomp.y"
-    { CallFunction(&(yyval.node), (yyvsp[(1) - (5)].place), (yyvsp[(3) - (5)].node));;}
+#line 106 "mycomp.y"
+    { CallFunction(&(yyval.node), (yyvsp[(1) - (5)].place), (yyvsp[(3) - (5)].node)); ;}
     break;
 
   case 29:
 
 /* Line 1455 of yacc.c  */
-#line 106 "mycomp.y"
-    {;}
+#line 107 "mycomp.y"
+    { Print(&(yyval.node), (yyvsp[(3) - (5)].node)); ;}
     break;
 
   case 30:
 
 /* Line 1455 of yacc.c  */
-#line 107 "mycomp.y"
-    { Println(&(yyval.node),(yyvsp[(3) - (5)].node));;}
+#line 108 "mycomp.y"
+    { Println(&(yyval.node),(yyvsp[(3) - (5)].node)); ;}
     break;
 
   case 31:
 
 /* Line 1455 of yacc.c  */
-#line 108 "mycomp.y"
+#line 109 "mycomp.y"
     { Read(&(yyval.node),(yyvsp[(1) - (6)].place));  ;}
     break;
 
   case 32:
 
 /* Line 1455 of yacc.c  */
-#line 111 "mycomp.y"
+#line 112 "mycomp.y"
     { Atrib(&(yyval.node),(yyvsp[(1) - (4)].place),(yyvsp[(3) - (4)].node)); ;}
     break;
 
   case 34:
 
 /* Line 1455 of yacc.c  */
-#line 116 "mycomp.y"
+#line 117 "mycomp.y"
     {(yyval.node) = (yyvsp[(2) - (3)].node);;}
     break;
 
   case 35:
 
 /* Line 1455 of yacc.c  */
-#line 120 "mycomp.y"
+#line 121 "mycomp.y"
     { If(&(yyval.node),(yyvsp[(3) - (5)].node),(yyvsp[(5) - (5)].node)); ;}
     break;
 
   case 36:
 
 /* Line 1455 of yacc.c  */
-#line 121 "mycomp.y"
+#line 122 "mycomp.y"
     { IfElse(&(yyval.node),(yyvsp[(3) - (7)].node),(yyvsp[(5) - (7)].node),(yyvsp[(7) - (7)].node)); ;}
     break;
 
   case 37:
 
 /* Line 1455 of yacc.c  */
-#line 125 "mycomp.y"
+#line 126 "mycomp.y"
     { While(&(yyval.node), (yyvsp[(3) - (5)].node), (yyvsp[(5) - (5)].node)); ;}
     break;
 
   case 38:
 
 /* Line 1455 of yacc.c  */
-#line 129 "mycomp.y"
+#line 130 "mycomp.y"
     { DoWhile(&(yyval.node), (yyvsp[(2) - (7)].node), (yyvsp[(5) - (7)].node)); ;}
     break;
 
   case 39:
 
 /* Line 1455 of yacc.c  */
-#line 132 "mycomp.y"
+#line 133 "mycomp.y"
     { ExpAri("add",&(yyval.node),(yyvsp[(1) - (3)].node),(yyvsp[(3) - (3)].node)); ;}
     break;
 
   case 40:
 
 /* Line 1455 of yacc.c  */
-#line 133 "mycomp.y"
+#line 134 "mycomp.y"
     { ExpAri("sub",&(yyval.node),(yyvsp[(1) - (3)].node),(yyvsp[(3) - (3)].node)); ;}
     break;
 
   case 41:
 
 /* Line 1455 of yacc.c  */
-#line 134 "mycomp.y"
+#line 135 "mycomp.y"
     { ExpAri("mul",&(yyval.node),(yyvsp[(1) - (3)].node),(yyvsp[(3) - (3)].node)); ;}
     break;
 
   case 42:
 
 /* Line 1455 of yacc.c  */
-#line 135 "mycomp.y"
+#line 136 "mycomp.y"
     { Div(&(yyval.node),(yyvsp[(1) - (3)].node),(yyvsp[(3) - (3)].node)); ;}
     break;
 
   case 43:
 
 /* Line 1455 of yacc.c  */
-#line 136 "mycomp.y"
+#line 137 "mycomp.y"
     { ExpRel("bgt",&(yyval.node),(yyvsp[(1) - (3)].node),(yyvsp[(3) - (3)].node)); ;}
     break;
 
   case 44:
 
 /* Line 1455 of yacc.c  */
-#line 137 "mycomp.y"
+#line 138 "mycomp.y"
     { ExpRel("blt",&(yyval.node),(yyvsp[(1) - (3)].node),(yyvsp[(3) - (3)].node)); ;}
     break;
 
   case 45:
 
 /* Line 1455 of yacc.c  */
-#line 138 "mycomp.y"
+#line 139 "mycomp.y"
     { ExpRel("bge",&(yyval.node),(yyvsp[(1) - (3)].node),(yyvsp[(3) - (3)].node)); ;}
     break;
 
   case 46:
 
 /* Line 1455 of yacc.c  */
-#line 139 "mycomp.y"
+#line 140 "mycomp.y"
     { ExpRel("ble",&(yyval.node),(yyvsp[(1) - (3)].node),(yyvsp[(3) - (3)].node)); ;}
     break;
 
   case 47:
 
 /* Line 1455 of yacc.c  */
-#line 140 "mycomp.y"
+#line 141 "mycomp.y"
     { ExpRel("beq",&(yyval.node),(yyvsp[(1) - (3)].node),(yyvsp[(3) - (3)].node)); ;}
     break;
 
   case 48:
 
 /* Line 1455 of yacc.c  */
-#line 141 "mycomp.y"
+#line 142 "mycomp.y"
     { ExpRel("bne",&(yyval.node),(yyvsp[(1) - (3)].node),(yyvsp[(3) - (3)].node)); ;}
     break;
 
   case 49:
 
 /* Line 1455 of yacc.c  */
-#line 142 "mycomp.y"
+#line 143 "mycomp.y"
     { ExpRel("and",&(yyval.node),(yyvsp[(1) - (3)].node),(yyvsp[(3) - (3)].node)); ;}
     break;
 
   case 50:
 
 /* Line 1455 of yacc.c  */
-#line 143 "mycomp.y"
+#line 144 "mycomp.y"
     { ExpRel("or",&(yyval.node),(yyvsp[(1) - (3)].node),(yyvsp[(3) - (3)].node)); ;}
     break;
 
   case 52:
 
 /* Line 1455 of yacc.c  */
-#line 145 "mycomp.y"
+#line 146 "mycomp.y"
     {  Li(&(yyval.node),(yyvsp[(1) - (1)].place)); ;}
     break;
 
   case 53:
 
 /* Line 1455 of yacc.c  */
-#line 146 "mycomp.y"
+#line 147 "mycomp.y"
     {  create_cod(&(yyval.node).code); (yyval.node).place = (yyvsp[(1) - (1)].place); ;}
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 1691 "mycomp.c"
+#line 1699 "mycomp.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1899,7 +1907,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 149 "mycomp.y"
+#line 150 "mycomp.y"
   
 int main(int argc, char **argv) {   
   freopen("saida.asm","w",stdout);	

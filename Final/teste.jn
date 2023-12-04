@@ -1,0 +1,11 @@
+int main()
+{
+    int  arg1, arg2;
+    arg1 = 11;
+    teste(arg1);
+   
+}
+
+void teste(int a){
+    print(a);
+}
