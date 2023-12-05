@@ -2,8 +2,7 @@ int main()
 {   int a, b, g;
     a = 10;
     b = 5;
-    g = 8;
-    teste(a, b, g);
+    teste(a, b);
 }
 
 void teste(int c, int d)
