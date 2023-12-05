@@ -281,10 +281,9 @@ void CallFunction(struct no *Func, int Id, struct no Args)
 void MoveParameter(struct no *Ldeclps, int Id)
 {
 	char reg_param[5];
-	if (strlen(Ldeclps->code) == 0)
-		create_cod(&Ldeclps->code);
-
 	getName(Id, reg_param);
+	create_cod(&Ldeclps->code);
+
 	sprintf(instrucao, "\tmove %s, $a%d\n", reg_param, param--);
 	insert_cod(&Ldeclps->code, instrucao);
 }
@@ -304,8 +303,8 @@ void SetParameter(struct no *Args, struct no Exp)
 {
 	char reg_arg[5];
 	getName(Exp.place, reg_arg);
-	if (strlen(Args->code) == 0)
-		create_cod(&Args->code);
+
+	create_cod(&Args->code);
 
 	if (Exp.place < 0)
 		insert_cod(&Args->code, Exp.code);
@@ -318,17 +317,16 @@ void SetMoreParameter(struct no *Args, struct no Exp, struct no *Arg)
 {
 	char reg_arg[5];
 	getName(Exp.place, reg_arg);
-
 	if (Exp.place < 0)
 		insert_cod(&Arg->code, Exp.code);
 
 	sprintf(instrucao, "\tmove $a%d, %s\n", param++, reg_arg);
 	insert_cod(&Arg->code, instrucao);
-	
+
 	insert_cod(&Args->code, Arg->code);
 }
 
-void Function(struct no *Func, int Id, struct no Declps, struct no Statement_Seq)
+void Function(struct no *Func, int Id, struct no Ldeclps, struct no Statement_Seq)
 {
 	create_cod(&Func->code);
 	if (Func->place == 0) // ignora o main
@@ -341,6 +339,7 @@ void Function(struct no *Func, int Id, struct no Declps, struct no Statement_Seq
 	{
 		sprintf(instrucao, "FUNC%d:\n", Id);
 		insert_cod(&Func->code, instrucao);
+		insert_cod(&Func->code, Ldeclps.code);
 		insert_cod(&Func->code, Statement_Seq.code);
 		sprintf(instrucao, "jr $ra\n");
 		insert_cod(&Func->code, instrucao);

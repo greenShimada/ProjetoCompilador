@@ -34,7 +34,7 @@
 %left '*' '/'
 
 %type <node> Exp Atribuicao Compound_Statement Statement Statement_Seq If_Statement
-%type <node> While_Statement Do_While_Statement Prog Funcao Args Ldeclps
+%type <node> While_Statement Do_While_Statement Prog Funcao Args Ldeclps Declps
 
 %start Prog
 %%
@@ -44,12 +44,21 @@ Prog :
 	;
 	
 Funcao:
-    Tipo_f ID '(' Ldeclps ')' '{' Decls Statement_Seq '}'  { Function(&$$, $2, $4, $8); printf("%s", $$.code); }
+    Tipo_f ID '(' Declps ')' '{' Decls Statement_Seq '}'  { Function(&$$, $2, $4, $8); printf("%s", $$.code); }
    ;
    
+Declps:
+	Ldeclps  {  create_cod(&$$.code); 
+				insert_cod(&$$.code,$1.code);
+			 }
+	|
+	;
+
 Ldeclps :
-		Tipo ID ',' Ldeclps { /*MoveMoreParameter(&$$, $2, &$4);*/ }
-	| 	Tipo ID  { /*MoveParameter(&$$, $2);*/ }
+	Tipo ID ',' Ldeclps { create_cod(&$$.code); 
+						  insert_cod(&$$.code,$1.code); 
+						}
+	| Tipo ID  { MoveParameter(&$$, $2); }
 	|
 	;
      

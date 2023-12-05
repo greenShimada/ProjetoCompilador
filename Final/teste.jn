@@ -1,5 +1,5 @@
 int main()
-{   int a, b, g;
+{   int a, b;
     a = 10;
     b = 5;
     teste(a, b);
