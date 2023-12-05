@@ -1,11 +1,13 @@
 int main()
-{
-    int  arg1, arg2;
-    arg1 = 11;
-    teste(arg1);
-   
+{   int a, b, g;
+    a = 10;
+    b = 5;
+    g = 8;
+    teste(a, b, g);
 }
 
-void teste(int a){
-    print(a);
+void teste(int c, int d)
+{
+    print(c);
+    print(d);
 }

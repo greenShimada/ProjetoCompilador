@@ -2,7 +2,11 @@
 #include "listacodigo.h"
 
 char instrucao[30];
-
+int param = 0;
+void resetParam()
+{
+	param = 0;
+}
 int temp = -1;
 int newTemp()
 {
@@ -266,19 +270,15 @@ void DoWhile(struct no *DoWhile_cmd, struct no Compound, struct no Exp)
 	insert_cod(&DoWhile_cmd->code, instrucao);
 }
 
-void CallFunction(struct no *Func, int Id, struct no Arg)
+void CallFunction(struct no *Func, int Id, struct no Args)
 {
-	char reg_arg[5];
-	getName(Arg.place, reg_arg);
-
 	create_cod(&Func->code);
-	sprintf(instrucao, "\tmove $a0, %s\n", reg_arg);
-	insert_cod(&Func->code, instrucao);
+	insert_cod(&Func->code, Args.code);
 	sprintf(instrucao, "\tjal FUNC%d\n", Id);
 	insert_cod(&Func->code, instrucao);
 }
 
-void MoveParameters(struct no *Func, struct no Declps)
+void MoveParameter(struct no *Func, struct no Declps)
 {
 	char reg_param[5];
 
@@ -287,10 +287,39 @@ void MoveParameters(struct no *Func, struct no Declps)
 	insert_cod(&Func->code, instrucao);
 }
 
+void SetParameter(struct no *Args, struct no Exp)
+{
+	char reg_arg[5];
+	getName(Exp.place, reg_arg);
+	if (strlen(Args->code) == 0){
+		create_cod(&Args->code);
+	}
+
+	if (Exp.place < 0)
+		insert_cod(&Args->code, Exp.code);
+
+	sprintf(instrucao, "\tmove $a%d, %s\n", param++, reg_arg);
+	insert_cod(&Args->code, instrucao);
+}
+
+void SetMoreParameter(struct no *Args, struct no Exp, struct no *Arg)
+{
+	char reg_arg[5];
+	getName(Exp.place, reg_arg);
+
+	if (Exp.place < 0)
+		insert_cod(&Arg->code, Exp.code);
+
+	sprintf(instrucao, "\tmove $a%d, %s\n", param++, reg_arg);
+	insert_cod(&Arg->code, instrucao);
+	
+	insert_cod(&Args->code, Arg->code);
+}
+
 void Function(struct no *Func, int Id, struct no Declps, struct no Statement_Seq)
 {
 	create_cod(&Func->code);
-	if (Func->place == 0)
+	if (Func->place == 0) // ignora o main
 	{
 		insert_cod(&Func->code, Statement_Seq.code);
 		sprintf(instrucao, "\tli $v0, 10\n\tsyscall\n");
@@ -300,7 +329,7 @@ void Function(struct no *Func, int Id, struct no Declps, struct no Statement_Seq
 	{
 		sprintf(instrucao, "FUNC%d:\n", Id);
 		insert_cod(&Func->code, instrucao);
-		MoveParameters(Func, Declps);
+		MoveParameter(Func, Declps);
 		insert_cod(&Func->code, Statement_Seq.code);
 		sprintf(instrucao, "jr $ra\n");
 		insert_cod(&Func->code, instrucao);

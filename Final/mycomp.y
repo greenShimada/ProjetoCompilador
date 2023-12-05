@@ -44,8 +44,7 @@ Prog :
 	;
 	
 Funcao:
-    Tipo_f ID '(' Declps ')' '{' Decls Statement_Seq '}'  { Function(&$$, $2, $4, $8); 	
-															printf("%s", $$.code); }
+    Tipo_f ID '(' Declps ')' '{' Decls Statement_Seq '}'  { Function(&$$, $2, $4, $8); printf("%s", $$.code); }
    ;
    
 Declps :
@@ -54,7 +53,7 @@ Declps :
 	;
 	
 Ldeclps :
-	  Tipo ID  {$$.place = $2}
+	  Tipo ID  { $$.place = $2; }
 	| Ldeclps ',' Tipo ID 
 	;
      
@@ -92,9 +91,10 @@ Statement_Seq:
 								 insert_cod(&$$.code,$2.code);	
 						       }
     
+	
 Args:
-	  Exp ',' Args
-	| Exp { $$ = $1; }
+	  Exp ',' Args { SetMoreParameter(&$$, $1, &$3); }
+	| Exp { SetParameter(&$$, $1); }
 	|
 	;
 		

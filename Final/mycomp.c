@@ -461,9 +461,9 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    42,    42,    43,    47,    52,    53,    57,    58,    62,
-      63,    64,    68,    69,    73,    77,    78,    82,    83,    87,
-      90,    96,    97,    98,   102,   103,   104,   105,   106,   107,
+       0,    42,    42,    43,    47,    51,    52,    56,    57,    61,
+      62,    63,    67,    68,    72,    76,    77,    81,    82,    86,
+      89,    96,    97,    98,   102,   103,   104,   105,   106,   107,
      108,   109,   112,   116,   117,   121,   122,   126,   130,   133,
      134,   135,   136,   137,   138,   139,   140,   141,   142,   143,
      144,   145,   146,   147
@@ -1466,28 +1466,27 @@ yyreduce:
 
 /* Line 1455 of yacc.c  */
 #line 47 "mycomp.y"
-    { Function(&(yyval.node), (yyvsp[(2) - (9)].place), (yyvsp[(4) - (9)].node), (yyvsp[(8) - (9)].node)); 	
-															printf("%s", (yyval.node).code); ;}
+    { Function(&(yyval.node), (yyvsp[(2) - (9)].place), (yyvsp[(4) - (9)].node), (yyvsp[(8) - (9)].node)); printf("%s", (yyval.node).code); ;}
     break;
 
   case 5:
 
 /* Line 1455 of yacc.c  */
-#line 52 "mycomp.y"
+#line 51 "mycomp.y"
     { (yyval.node) = (yyvsp[(1) - (1)].node); ;}
     break;
 
   case 7:
 
 /* Line 1455 of yacc.c  */
-#line 57 "mycomp.y"
-    {(yyval.node).place = (yyvsp[(2) - (2)].place);}
+#line 56 "mycomp.y"
+    { (yyval.node).place = (yyvsp[(2) - (2)].place); ;}
     break;
 
   case 19:
 
 /* Line 1455 of yacc.c  */
-#line 87 "mycomp.y"
+#line 86 "mycomp.y"
     { create_cod(&(yyval.node).code); 
 								 insert_cod(&(yyval.node).code,(yyvsp[(1) - (1)].node).code);
 							   ;}
@@ -1496,18 +1495,25 @@ yyreduce:
   case 20:
 
 /* Line 1455 of yacc.c  */
-#line 90 "mycomp.y"
+#line 89 "mycomp.y"
     { create_cod(&(yyval.node).code); 
 								 insert_cod(&(yyval.node).code,(yyvsp[(1) - (2)].node).code); 
 								 insert_cod(&(yyval.node).code,(yyvsp[(2) - (2)].node).code);	
 						       ;}
     break;
 
+  case 21:
+
+/* Line 1455 of yacc.c  */
+#line 96 "mycomp.y"
+    { SetMoreParameter(&(yyval.node), (yyvsp[(1) - (3)].node), &(yyvsp[(3) - (3)].node)); ;}
+    break;
+
   case 22:
 
 /* Line 1455 of yacc.c  */
 #line 97 "mycomp.y"
-    { (yyval.node) = (yyvsp[(1) - (1)].node); ;}
+    { SetParameter(&(yyval.node), (yyvsp[(1) - (1)].node)); ;}
     break;
 
   case 26:
@@ -1695,7 +1701,7 @@ yyreduce:
 
 
 /* Line 1455 of yacc.c  */
-#line 1699 "mycomp.c"
+#line 1705 "mycomp.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
