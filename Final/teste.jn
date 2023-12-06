@@ -1,5 +1,5 @@
 int main()
-{   int a, b;
+{   int a, b, e;
     a = 10;
     b = 5;
     teste(a, b);
@@ -7,6 +7,6 @@ int main()
 
 void teste(int c, int d)
 {
-    print(c);
-    print(d);
+    println(c);
+    println(d);
 }

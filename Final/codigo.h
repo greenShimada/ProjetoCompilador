@@ -284,7 +284,7 @@ void MoveParameter(struct no *Ldeclps, int Id)
 	getName(Id, reg_param);
 	create_cod(&Ldeclps->code);
 
-	sprintf(instrucao, "\tmove %s, $a%d\n", reg_param, param--);
+	sprintf(instrucao, "\tmove %s, $a%d\n", reg_param, --param);
 	insert_cod(&Ldeclps->code, instrucao);
 }
 
@@ -292,8 +292,10 @@ void MoveMoreParameter(struct no *Ldeclps, int Id, struct no *Ldeclp)
 {
 	char reg_param[5];
 
+	create_cod(&Ldeclps->code);
+
 	getName(Id, reg_param);
-	sprintf(instrucao, "\tmove %s, $a%d\n", reg_param, param--);
+	sprintf(instrucao, "\tmove %s, $a%d\n", reg_param, --param);
 	insert_cod(&Ldeclp->code, instrucao);
 
 	insert_cod(&Ldeclps->code, Ldeclp->code);
