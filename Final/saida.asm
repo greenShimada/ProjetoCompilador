@@ -8,7 +8,7 @@
 	move $a0, $s2
 	move $a1, $s1
 	jal FUNC4
-	move $a2, $s2
+	move $a0, $s3
 	jal FUNC5
 	li $v0, 10
 	syscall

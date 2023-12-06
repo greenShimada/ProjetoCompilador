@@ -1,19 +1,19 @@
 int main()
-{   int a, b, e;
+{   int a, b, c;
     a = 10;
     b = 5;
-    e = 2;
+    c = 2;
     teste(a, b);
-    torce(b);
+    torce(c);
 }
 
-void teste(int c, int d)
+void teste(int d, int e)
 {
-    println(c);
     println(d);
+    println(e);
 }
 
-void torce(int c)
+void torce(int d)
 {
-    print(c);
+    print(d);
 }

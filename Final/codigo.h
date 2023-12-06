@@ -4,11 +4,7 @@
 char instrucao[30];
 int param = 0;
 int arg = 0;
-void resetParams()
-{
-	arg = 0;
-	param = 0;
-}
+
 int temp = -1;
 int newTemp()
 {
@@ -278,6 +274,7 @@ void CallFunction(struct no *Func, int Id, struct no Args)
 	insert_cod(&Func->code, Args.code);
 	sprintf(instrucao, "\tjal FUNC%d\n", Id);
 	insert_cod(&Func->code, instrucao);
+	param = 0;
 }
 
 void MoveParameter(struct no *Ldeclps, int Id)
@@ -347,7 +344,6 @@ void Function(struct no *Func, int Id, struct no Ldeclps, struct no Statement_Se
 		insert_cod(&Func->code, Statement_Seq.code);
 		sprintf(instrucao, "jr $ra\n");
 		insert_cod(&Func->code, instrucao);
-
-		resetParams();
+		arg = 0;
 	}
 }
