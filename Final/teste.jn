@@ -2,11 +2,18 @@ int main()
 {   int a, b, e;
     a = 10;
     b = 5;
+    e = 2;
     teste(a, b);
+    torce(b);
 }
 
 void teste(int c, int d)
 {
     println(c);
     println(d);
+}
+
+void torce(int c)
+{
+    print(c);
 }
