@@ -35,6 +35,8 @@ void Atrib(struct no *Atrib, int $1, struct no $3)
 	create_cod(&Atrib->code);
 	insert_cod(&Atrib->code, $3.code);
 	insert_cod(&Atrib->code, instrucao);
+
+	temp++;
 }
 
 void Li(struct no *Exp, int num)

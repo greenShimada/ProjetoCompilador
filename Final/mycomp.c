@@ -1513,20 +1513,6 @@ yyreduce:
     { SetParameter(&(yyval.node), (yyvsp[(1) - (1)].node)); ;}
     break;
 
-  case 25:
-
-/* Line 1455 of yacc.c  */
-#line 100 "mycomp.y"
-    {;}
-    break;
-
-  case 26:
-
-/* Line 1455 of yacc.c  */
-#line 101 "mycomp.y"
-    {;}
-    break;
-
   case 27:
 
 /* Line 1455 of yacc.c  */
@@ -1698,7 +1684,7 @@ yyreduce:
 
 
 /* Line 1455 of yacc.c  */
-#line 1702 "mycomp.c"
+#line 1688 "mycomp.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);

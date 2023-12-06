@@ -97,8 +97,8 @@ Args:
 Statement: 
 		Atribuicao
 	|	If_Statement 
-	| 	While_Statement {}
-	|   Do_While_Statement {}
+	| 	While_Statement
+	|   Do_While_Statement
 	|   ID '(' Args ')' ';' { CallFunction(&$$, $1, $3); }
 	|	PRINT '(' Exp ')' ';' { Print(&$$, $3); }
 	|   PRINTLN '(' Exp ')' ';' { Println(&$$,$3); }
