@@ -1480,6 +1480,13 @@ yyreduce:
     { MoveParameter(&(yyval.node), (yyvsp[(2) - (2)].place)); ;}
     break;
 
+  case 7:
+
+/* Line 1455 of yacc.c  */
+#line 53 "mycomp.y"
+    {(yyval.node) = (yyval.node);;}
+    break;
+
   case 18:
 
 /* Line 1455 of yacc.c  */
@@ -1511,6 +1518,13 @@ yyreduce:
 /* Line 1455 of yacc.c  */
 #line 93 "mycomp.y"
     { SetParameter(&(yyval.node), (yyvsp[(1) - (1)].node)); ;}
+    break;
+
+  case 22:
+
+/* Line 1455 of yacc.c  */
+#line 94 "mycomp.y"
+    { (yyval.node) = (yyval.node);;}
     break;
 
   case 27:
@@ -1667,6 +1681,13 @@ yyreduce:
     { ExpRel("or",&(yyval.node),(yyvsp[(1) - (3)].node),(yyvsp[(3) - (3)].node)); ;}
     break;
 
+  case 50:
+
+/* Line 1455 of yacc.c  */
+#line 141 "mycomp.y"
+    { (yyval.node) = (yyvsp[(2) - (3)].node); ;}
+    break;
+
   case 51:
 
 /* Line 1455 of yacc.c  */
@@ -1684,7 +1705,7 @@ yyreduce:
 
 
 /* Line 1455 of yacc.c  */
-#line 1688 "mycomp.c"
+#line 1709 "mycomp.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
