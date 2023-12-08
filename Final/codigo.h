@@ -3,10 +3,8 @@
 
 char instrucao[30];
 int param = 0;
-void resetParam()
-{
-	param = 0;
-}
+int arg = 0;
+
 int temp = -1;
 int newTemp()
 {
@@ -37,6 +35,8 @@ void Atrib(struct no *Atrib, int $1, struct no $3)
 	create_cod(&Atrib->code);
 	insert_cod(&Atrib->code, $3.code);
 	insert_cod(&Atrib->code, instrucao);
+
+	temp++;
 }
 
 void Li(struct no *Exp, int num)
@@ -276,6 +276,7 @@ void CallFunction(struct no *Func, int Id, struct no Args)
 	insert_cod(&Func->code, Args.code);
 	sprintf(instrucao, "\tjal FUNC%d\n", Id);
 	insert_cod(&Func->code, instrucao);
+	param = 0;
 }
 
 void MoveParameter(struct no *Ldeclps, int Id)
@@ -284,7 +285,7 @@ void MoveParameter(struct no *Ldeclps, int Id)
 	getName(Id, reg_param);
 	create_cod(&Ldeclps->code);
 
-	sprintf(instrucao, "\tmove %s, $a%d\n", reg_param, --param);
+	sprintf(instrucao, "\tmove %s, $a%d\n", reg_param, arg++);
 	insert_cod(&Ldeclps->code, instrucao);
 }
 
@@ -295,7 +296,7 @@ void MoveMoreParameter(struct no *Ldeclps, int Id, struct no *Ldeclp)
 	create_cod(&Ldeclps->code);
 
 	getName(Id, reg_param);
-	sprintf(instrucao, "\tmove %s, $a%d\n", reg_param, --param);
+	sprintf(instrucao, "\tmove %s, $a%d\n", reg_param, arg++);
 	insert_cod(&Ldeclp->code, instrucao);
 
 	insert_cod(&Ldeclps->code, Ldeclp->code);
@@ -345,5 +346,6 @@ void Function(struct no *Func, int Id, struct no Ldeclps, struct no Statement_Se
 		insert_cod(&Func->code, Statement_Seq.code);
 		sprintf(instrucao, "jr $ra\n");
 		insert_cod(&Func->code, instrucao);
+		arg = 0;
 	}
 }

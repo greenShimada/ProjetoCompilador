@@ -1,12 +1,13 @@
 int main()
-{   int a, b, e;
-    a = 10;
-    b = 5;
-    teste(a, b);
+{
+    int a;
+    a = 4;
+    soma10ePrinta(a);
+    println(a);
 }
 
-void teste(int c, int d)
+void soma10ePrinta(int a)
 {
-    println(c);
-    println(d);
+    a = a + 10;
+    println(a);
 }

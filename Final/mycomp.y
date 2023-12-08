@@ -50,7 +50,7 @@ Funcao:
 Ldeclps :
 	Tipo ID ',' Ldeclps { MoveMoreParameter(&$$, $2, &$4); }
 	| Tipo ID   { MoveParameter(&$$, $2); }
-	|
+	| {$$ = $$;}
 	;
      
 Tipo_f :
@@ -91,14 +91,14 @@ Statement_Seq:
 Args:
 	  Exp ',' Args { SetMoreParameter(&$$, $1, &$3); }
 	| Exp { SetParameter(&$$, $1); }
-	|
+	| { $$ = $$;}
 	;
 		
 Statement: 
 		Atribuicao
 	|	If_Statement 
-	| 	While_Statement {}
-	|   Do_While_Statement {}
+	| 	While_Statement
+	|   Do_While_Statement
 	|   ID '(' Args ')' ';' { CallFunction(&$$, $1, $3); }
 	|	PRINT '(' Exp ')' ';' { Print(&$$, $3); }
 	|   PRINTLN '(' Exp ')' ';' { Println(&$$,$3); }
@@ -138,7 +138,7 @@ Exp : Exp '+' Exp  { ExpAri("add",&$$,$1,$3); }
 	| Exp NE Exp   { ExpRel("bne",&$$,$1,$3); }
 	| Exp AND Exp  { ExpRel("and",&$$,$1,$3); }
 	| Exp OR Exp   { ExpRel("or",&$$,$1,$3); }
-	| '(' Exp ')'  
+	| '(' Exp ')'  { $$ = $2; }
 	| NUM	  {  Li(&$$,$1); } 				 		   
 	| ID      {  create_cod(&$$.code); $$.place = $1; }     
 	;   
